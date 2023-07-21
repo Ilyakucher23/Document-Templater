@@ -10,8 +10,10 @@
             <div class="card-body">
                 <div class="row g-0 justify-content-between">
                     <div class="col">
-                        <h5 class="card-title">Название шаблона</h5>
-                        <p class="card-text col">Le template description</p>
+                        <h5 class="card-title">ДОВІДКА для дитячого садочку, школи
+                        </h5>
+                        <p class="card-text col">Довідка для хворої дитини що доказує виправдану вітсутність у дитячому
+                            садочку, школі</p>
                     </div>
                     <div class="col-auto">
                         <button class="btn btn-primary">Удалить</button>
