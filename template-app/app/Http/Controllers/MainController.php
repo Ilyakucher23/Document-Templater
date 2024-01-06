@@ -34,7 +34,6 @@ class MainController extends Controller
         // unlink($storagePath . "DoctorDocument.docx");
 
         return response()->download($storagePath . '\\DoctorDocument.docx')->deleteFileAfterSend(true);
-
     }
 
     public function editor()
@@ -62,15 +61,17 @@ class MainController extends Controller
 
         return response()->download(storage_path('helloWorld.docx')); */
         //$htmlTemplate = '<p style=" text-align: center;">asdasdasdasd</p><p>asd<strong>asd</strong></p><p>asdasd</p>';/* ' <p style="background-color:#FFFF00;color:#FF0000;">Some text</p>' */ 
-        //dd($redacted);
+        
+        //dd($request->content);
 
-        $str = preg_replace('/div>/i', 'p>',$request->content);
-        $redacted = str_replace('<br>','</p><p>',$str);
-
+        $str = preg_replace('/div>/i', 'p>', $request->secret);
+        /* $redacted = str_replace('<br>','</p><p>',$str); */
+        $redacted = str_replace('<br data-cke-filler="true">', '<br data-cke-filler="true" />', $str);
+        /*dd($request->secret); */
         $phpWord = new PhpWord();
         $section = $phpWord->addSection();
         Html::addHtml($section, $redacted);
-        $targetFile = __DIR__ . "/1.docx";
+        $targetFile = dirname(__DIR__, 2) . "/temp.docx";
         $phpWord->save($targetFile, 'Word2007');
     }
 }
