@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Storage;
 
 class AuthController extends Controller
 {
@@ -27,6 +29,7 @@ class AuthController extends Controller
         $fields['password'] = bcrypt($fields['password']);
         $user = User::create($fields);
         auth()->login($user);
+        Storage::makeDirectory("userfiles/{$user->id}");
         return redirect('/');
         // return redirect('/')->with('message','You are logged in!');
     }
@@ -49,6 +52,9 @@ class AuthController extends Controller
             $request->session()->regenerate();
             return redirect('/');
         }
-        return back()->withErrors(['email'=>'Invalid User']);
+        return back()->withErrors(['email' => 'Invalid User']);
+    }
+    public function createUserFolder()
+    {
     }
 }

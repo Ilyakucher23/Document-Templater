@@ -2,13 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
-use PhpOffice\PhpWord\PhpWord;
-use PhpOffice\PhpWord\TemplateProcessor;
-use PhpOffice\PhpWord\Shared\Html;
-
 use Exception;
+use App\Models\File;
+use Illuminate\Support\Str;
+use Illuminate\Http\Request;
+use PhpOffice\PhpWord\PhpWord;
+
+use PhpOffice\PhpWord\Shared\Html;
+use Illuminate\Support\Facades\Auth;
+
+use Illuminate\Support\Facades\Storage;
+use PhpOffice\PhpWord\TemplateProcessor;
 
 class MainController extends Controller
 {
@@ -61,17 +65,38 @@ class MainController extends Controller
 
         return response()->download(storage_path('helloWorld.docx')); */
         //$htmlTemplate = '<p style=" text-align: center;">asdasdasdasd</p><p>asd<strong>asd</strong></p><p>asdasd</p>';/* ' <p style="background-color:#FFFF00;color:#FF0000;">Some text</p>' */ 
-        
+
         //dd($request->content);
 
-        $str = preg_replace('/div>/i', 'p>', $request->secret);
+        // $str = preg_replace('/div>/i', 'p>', $request->secret); //this line is not needed it's related to trix editor 
         /* $redacted = str_replace('<br>','</p><p>',$str); */
-        $redacted = str_replace('<br data-cke-filler="true">', '<br data-cke-filler="true" />', $str);
+        $redacted = str_replace('<br data-cke-filler="true">', '<br data-cke-filler="true" />', $request->secret);
         /*dd($request->secret); */
         $phpWord = new PhpWord();
         $section = $phpWord->addSection();
         Html::addHtml($section, $redacted);
-        $targetFile = dirname(__DIR__, 2) . "/temp.docx";
-        $phpWord->save($targetFile, 'Word2007');
+
+        $user_id = auth()->user()->id;
+        $user_folder = storage_path("app\\userfiles\\{$user_id}\\");
+        $filename = Str::random(32) . ".docx";
+        $file_path = $user_folder . $filename;
+
+
+        $phpWord->save($file_path, 'Word2007');
+
+        $file = File::create([
+            'filename' => $filename,
+            'user_id' => $user_id,
+        ]);
+
+        return redirect('/');
+    }
+    public function templates()
+    {
+        if (Auth::check()) {
+            $templates = Auth::user()->files()->get();
+            return view('index', ['templates' => $templates]);
+        }
+        return view('index', ['templates' => []]);
     }
 }

@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-    <div class="card mb-4">
+    {{-- <div class="card mb-4">
         <div class="card-body">
             <div class="row g-0 justify-content-between">
                 <div class="col">
@@ -21,14 +21,16 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
 
-    <div class="card md-4">
+    @auth
+    @foreach ($templates as $template)
+    <div class="card mb-4">
         <div class="card-body">
             <div class="row g-0 justify-content-between">
                 <div class="col">
-                    <a href="/generate/2" class="text-decoration-none mt-3 text-black">
-                        <h5 class="card-title">Название шаблона</h5>
+                    <a href="/generate/{{$template->id}}" class="text-decoration-none mt-3 text-black">
+                        <h5 class="card-title">{{$template->filename}}</h5>
                         <p class="card-text col">Le template description</p>
                     </a>
                 </div>
@@ -40,5 +42,11 @@
         </div>
 
     </div>
+    @endforeach
+    @else
+       No templates yet     
+    @endauth
+    
+    
     <script type="module" src="index.js"></script>
 @endsection

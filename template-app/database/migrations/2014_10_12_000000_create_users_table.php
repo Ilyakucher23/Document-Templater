@@ -18,6 +18,12 @@ return new class extends Migration
             $table->string('password');
             $table->timestamps();
         });
+        Schema::create('files', function (Blueprint $table) {
+            $table->id();
+            $table->string('filename');
+            $table->integer('user_id');
+            $table->timestamps();
+        });
     }
 
     /**
