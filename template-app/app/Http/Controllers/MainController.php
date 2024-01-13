@@ -40,9 +40,15 @@ class MainController extends Controller
         return response()->download($storagePath . '\\DoctorDocument.docx')->deleteFileAfterSend(true);
     }
 
-    public function editor()
+    public function editor(Request $request)
     {
+        //dd($request);
         return view('editor');
+    }
+
+    public function create()
+    {
+        return view('create_doc');
     }
 
     public function save(Request $request)

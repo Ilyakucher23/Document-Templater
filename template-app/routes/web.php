@@ -17,7 +17,10 @@ Route::get('/generate/{id}', [MainController::class, 'make_doc'])->where('id', '
 
 Route::post('/generate/{id}/download', [MainController::class, 'download_doc'])->where('id', '[0-9]+');
 
+Route::get('/create', [MainController::class, 'create']);
+
 Route::get('/editor', [MainController::class, 'editor']);
+
 Route::post('/save', [MainController::class, 'save']);
 
 //Authentiation/registration

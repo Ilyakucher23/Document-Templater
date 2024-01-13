@@ -21,7 +21,16 @@
 
     <script>
         DecoupledEditor
-            .create(document.querySelector('#editor'))
+            .create(document.querySelector('#editor'), {
+                toolbar: {
+                    items: ['undo', 'redo',
+                        '|', 'fontfamily', 'fontsize', 'fontColor', 'fontBackgroundColor',
+                        '|', 'bold', 'italic', 'strikethrough', 'subscript', 'superscript', 'code',
+                        '|', 'bulletedList', 'numberedList', 'todoList', 'outdent', 'indent'
+                    ],
+                    shouldNotGroupWhenFull: false
+                }
+            })
             .then(editor => {
                 const toolbarContainer = document.querySelector('#toolbar-container');
 

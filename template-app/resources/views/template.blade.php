@@ -27,14 +27,14 @@
     <nav class="py-2 bg-body-tertiary border-bottom">
         <div class="container d-flex flex-wrap">
             <ul class="nav me-auto">
-                <li class="nav-item"><a href="#" class="nav-link link-body-emphasis px-2 active"
+                <li class="nav-item"><a href="/" class="nav-link link-body-emphasis px-2 active"
                         aria-current="page">Home</a></li>
-                <li class="nav-item"><a href="#" class="nav-link link-body-emphasis px-2">Features</a></li>
-                <li class="nav-item"><a href="#" class="nav-link link-body-emphasis px-2">Pricing</a></li>
-                <li class="nav-item"><a href="#" class="nav-link link-body-emphasis px-2">FAQs</a></li>
-                <li class="nav-item"><a href="#" class="nav-link link-body-emphasis px-2">About</a></li>
+                @auth
+                    <li class="nav-item"><a href="/create" class="nav-link link-body-emphasis px-2">Create new template
+                            file</a></li>
+                @endauth
             </ul>
-            <form class="inline" methon='GET' action="{{ route('logout') }}" >
+            <form class="inline" methon='GET' action="{{ route('logout') }}">
                 <ul class="nav">
                     @auth
                         <li class="nav-item"><span class="nav-link link-body-emphasis px-2">Welcome
