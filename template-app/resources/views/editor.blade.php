@@ -15,6 +15,8 @@
                 <p>This is the initial editor content.</p>
             </div>
             <input type="hidden" name="secret" id="secret">
+            <input type="hidden" name="title" id="title" value="{{request()->input("name")}}">
+            <input type="hidden" name="desc" id="desc" value="{{request()->input("desc")}}">
             <button type="submit" onclick="return prepareSubmit()" class="btn btn-primary">Save</button>
         </form>
     </div>

@@ -29,10 +29,9 @@
         <div class="card-body">
             <div class="row g-0 justify-content-between">
                 <div class="col">
-                    <a href="/generate/{{$template->id}}" class="text-decoration-none mt-3 text-black">
-                        <h5 class="card-title">{{$template->filename}}</h5>
-                        <p class="card-text col">Le template description</p>
-                    </a>
+                        <h5 class="card-title"><a href="/generate/{{$template->id}}" class="text-decoration-none mt-3 text-black">{{$template->title}}</a></h5>
+                        <p class="card-text col">{{$template->desc}}</p>
+                    
                 </div>
                 <div class="col-auto">
                     <button class="btn btn-primary">Удалить</button>

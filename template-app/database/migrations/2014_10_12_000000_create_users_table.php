@@ -20,6 +20,8 @@ return new class extends Migration
         });
         Schema::create('files', function (Blueprint $table) {
             $table->id();
+            $table->string('title');
+            $table->string('desc');
             $table->string('filename');
             $table->integer('user_id');
             $table->timestamps();
@@ -32,5 +34,6 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('users');
+        Schema::dropIfExists('files');
     }
 };

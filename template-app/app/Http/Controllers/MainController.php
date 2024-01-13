@@ -16,28 +16,30 @@ use PhpOffice\PhpWord\TemplateProcessor;
 
 class MainController extends Controller
 {
-    public function make_doc($id)
+    public function make_doc($file_id)
     {
         //calc
-        return view('document_show');
+        return view('document_show', ['template' => File::find($file_id)]);
     }
-    public function download_doc($id)
+    public function download_doc($file_id)
     {
+        $file =File::find($file_id);
 
-        $doc_vars = request()->doc_vars;
-        $storagePath = Storage::disk('local')->path('tempuser/');
-        $templateProcessor = new TemplateProcessor($storagePath . 'DoctorTemplate.docx');
-        // dd($templateProcessor);
-        foreach ($doc_vars as $i => $var) {
-            $templateProcessor->setValue($i, $var);
-        }
-        $templateProcessor->saveAs($storagePath . 'DoctorDocument.docx');
+        // dd();
+        // $doc_vars = request()->doc_vars;
+        // $storagePath = Storage::disk('local')->path('tempuser/');
+        // $templateProcessor = new TemplateProcessor($storagePath . 'DoctorTemplate.docx');
+        // // dd($templateProcessor);
+        // foreach ($doc_vars as $i => $var) {
+        //     $templateProcessor->setValue($i, $var);
+        // }
+        // $templateProcessor->saveAs($storagePath . 'DoctorDocument.docx');
 
         // dd($templateProcessor);
         // $result = Storage::download('tempuser/DoctorDocument.docx');
         // unlink($storagePath . "DoctorDocument.docx");
 
-        return response()->download($storagePath . '\\DoctorDocument.docx')->deleteFileAfterSend(true);
+        return response()->download($file->link());
     }
 
     public function editor(Request $request)
@@ -76,6 +78,8 @@ class MainController extends Controller
 
         // $str = preg_replace('/div>/i', 'p>', $request->secret); //this line is not needed it's related to trix editor 
         /* $redacted = str_replace('<br>','</p><p>',$str); */
+        // dd($request->title);
+
         $redacted = str_replace('<br data-cke-filler="true">', '<br data-cke-filler="true" />', $request->secret);
         /*dd($request->secret); */
         $phpWord = new PhpWord();
@@ -91,10 +95,11 @@ class MainController extends Controller
         $phpWord->save($file_path, 'Word2007');
 
         $file = File::create([
+            'title'=>$request->title,
+            'desc'=>$request->desc,
             'filename' => $filename,
             'user_id' => $user_id,
         ]);
-
         return redirect('/');
     }
     public function templates()

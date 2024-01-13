@@ -5,9 +5,9 @@
 @endsection
 
 @section('content')
-    <form action="/generate/1/download" method="POST">
+    <form action="/generate/{{$template->id}}/download" method="POST">
         @csrf
-        <h1 class="text-center mb-5 mt-5">ДОВІДКА для дитячого садочку, школи</h1>
+        <h1 class="text-center mb-5 mt-5">{{$template->title}}</h1>
         <div class="card mb-3">
             <div class="card-body">
                 <label class="form-label">П.І.Б. пацієнта </label>
