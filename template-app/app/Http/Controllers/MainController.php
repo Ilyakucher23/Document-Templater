@@ -55,6 +55,7 @@ class MainController extends Controller
 
     public function save(Request $request)
     {
+         #region useless code
         //dd($request->content);
         /* $phpWord = new \PhpOffice\PhpWord\PhpWord();
         $section = $phpWord->addSection();
@@ -79,8 +80,12 @@ class MainController extends Controller
         // $str = preg_replace('/div>/i', 'p>', $request->secret); //this line is not needed it's related to trix editor 
         /* $redacted = str_replace('<br>','</p><p>',$str); */
         // dd($request->title);
-
+        #endregion
         $redacted = str_replace('<br data-cke-filler="true">', '<br data-cke-filler="true" />', $request->secret);
+        // hsl to hex replace will replce until no hsl color
+        $redacted  = preg_replace_callback('/hsl\((\d+),\s*(\d+%)\s*,\s*(\d+%)\)/', 'self::hslToHex', $redacted);
+        preg_match_all('/hsl\((\d+),/', $redacted, $matches, PREG_SET_ORDER);
+
         /*dd($request->secret); */
         $phpWord = new PhpWord();
         $section = $phpWord->addSection();
@@ -109,5 +114,48 @@ class MainController extends Controller
             return view('index', ['templates' => $templates]);
         }
         return view('index', ['templates' => []]);
+    }
+
+    static function ColorHSLToRGB($hue, $saturation, $luminosity)
+    {
+        $hue = $hue / 360; // Normalize hue to [0, 1]
+        $saturation = rtrim($saturation, '%') / 100; // Normalize saturation to [0, 1]
+        $luminosity = rtrim($luminosity, '%') / 100; // Normalize luminosity to [0, 1]
+
+        // Calculate RGB values
+        $chroma = (1 - abs(2 * $luminosity - 1)) * $saturation;
+        $x = $chroma * (1 - abs(fmod($hue * 6, 2) - 1));
+        $m = $luminosity - $chroma / 2;
+
+        if ($hue < 1 / 6) {
+            list($r, $g, $b) = array($chroma, $x, 0);
+        } elseif ($hue < 2 / 6) {
+            list($r, $g, $b) = array($x, $chroma, 0);
+        } elseif ($hue < 3 / 6) {
+            list($r, $g, $b) = array(0, $chroma, $x);
+        } elseif ($hue < 4 / 6) {
+            list($r, $g, $b) = array(0, $x, $chroma);
+        } elseif ($hue < 5 / 6) {
+            list($r, $g, $b) = array($x, 0, $chroma);
+        } else {
+            list($r, $g, $b) = array($chroma, 0, $x);
+        }
+
+        // Adjust RGB values and convert to HEX
+        $r = round(($r + $m) * 255);
+        $g = round(($g + $m) * 255);
+        $b = round(($b + $m) * 255);
+
+        return sprintf("#%02X%02X%02X", $r, $g, $b);
+    }
+
+    static function hslToHex($matches)
+    {
+        list($fullMatch, $hue, $saturation, $luminosity) = $matches;
+
+        // Convert HSL to HEX
+        $hexColor = self::ColorHSLToRGB($hue, $saturation, $luminosity);
+
+        return $hexColor;
     }
 }
