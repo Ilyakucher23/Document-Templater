@@ -19,7 +19,10 @@
     <script src="https://kit.fontawesome.com/599f7737e5.js" crossorigin="anonymous"></script>
 
     {{-- ckeditor 5 --}}
-    <script src="https://cdn.ckeditor.com/ckeditor5/40.2.0/decoupled-document/ckeditor.js"></script>
+    {{-- <script src="https://cdn.ckeditor.com/ckeditor5/40.2.0/decoupled-document/ckeditor.js"></script> --}}
+    <script src="{{ asset('assets/vendor/ckeditor5/build/ckeditor.js') }}"></script>
+    <link href="{{ asset('css/styles.css') }}" rel="stylesheet">
+   {{--  <script src="{{ asset('assets/vendor/ckeditor5/build/plugin.js') }}"></script> --}}
     <title>@yield('title')</title>
 </head>
 
@@ -51,7 +54,7 @@
         </div>
     </nav>
 
-    <main class="container my-3 px-3">@yield('content')</main>
+    <main class="m-0 w-100">@yield('content')</main>
 </body>
 
 </html>

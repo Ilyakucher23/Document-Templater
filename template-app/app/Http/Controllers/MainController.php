@@ -75,7 +75,7 @@ class MainController extends Controller
         return response()->download(storage_path('helloWorld.docx')); */
         //$htmlTemplate = '<p style=" text-align: center;">asdasdasdasd</p><p>asd<strong>asd</strong></p><p>asdasd</p>';/* ' <p style="background-color:#FFFF00;color:#FF0000;">Some text</p>' */ 
 
-        //dd($request->content);
+        //dd($request);
 
         // $str = preg_replace('/div>/i', 'p>', $request->secret); //this line is not needed it's related to trix editor 
         /* $redacted = str_replace('<br>','</p><p>',$str); */
