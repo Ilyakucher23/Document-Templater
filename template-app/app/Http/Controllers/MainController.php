@@ -9,8 +9,8 @@ use Illuminate\Http\Request;
 use PhpOffice\PhpWord\PhpWord;
 
 use PhpOffice\PhpWord\Shared\Html;
-use Illuminate\Support\Facades\Auth;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use PhpOffice\PhpWord\TemplateProcessor;
 
@@ -19,27 +19,41 @@ class MainController extends Controller
     public function make_doc($file_id)
     {
         //calc
-        return view('document_show', ['template' => File::find($file_id)]);
+        return view('document_show', ['template' => \App\Models\File::find($file_id)]);
     }
     public function download_doc($file_id)
     {
-        $file =File::find($file_id);
-
-        // dd();
+        $file = \App\Models\File::find($file_id);
+        // dd($file->link());
         // $doc_vars = request()->doc_vars;
-        // $storagePath = Storage::disk('local')->path('tempuser/');
-        // $templateProcessor = new TemplateProcessor($storagePath . 'DoctorTemplate.docx');
-        // // dd($templateProcessor);
-        // foreach ($doc_vars as $i => $var) {
-        //     $templateProcessor->setValue($i, $var);
-        // }
-        // $templateProcessor->saveAs($storagePath . 'DoctorDocument.docx');
+        // $doc_vars_names = request()->doc_vars_names;
+        $doc_dict= array_combine(request()->doc_vars_names,request()->doc_vars);
+        // dd($doc_dict);
+        $user_id = auth()->user()->id;
+        $user_folder = storage_path("app\\userfiles\\{$user_id}\\");
+        $filename = $file->filename;
+
+        $old_path = $user_folder . $filename;
+        $new_path = $user_folder ."new_". $filename;
+
+        // dd($new_path);
+        
+        // $storagePath = $file->link();
+        \Illuminate\Support\Facades\File::copy($old_path,$new_path);
+        
+        $templateProcessor = new TemplateProcessor($new_path);
+        // dd($templateProcessor);
+        foreach ($doc_dict as $key => $value) {
+            $templateProcessor->setValue($key, $value);
+        }
+        $templateProcessor->saveAs($new_path);
 
         // dd($templateProcessor);
-        // $result = Storage::download('tempuser/DoctorDocument.docx');
-        // unlink($storagePath . "DoctorDocument.docx");
+        // $result = Storage::download(($storagePath));
+        // unlink($storagePath);
 
-        return response()->download($file->link());
+        return response()->download(($new_path))->deleteFileAfterSend(true);;
+        // return redirect('/');
     }
 
     public function editor(Request $request)
@@ -55,32 +69,7 @@ class MainController extends Controller
 
     public function save(Request $request)
     {
-         #region useless code
-        //dd($request->content);
-        /* $phpWord = new \PhpOffice\PhpWord\PhpWord();
-        $section = $phpWord->addSection();
-
-        $description = "<p>sdfasdasd</p>";
-
-        $section->addText($description);
-        $objWriter = \PhpOffice\PhpWord\IOFactory::createWriter($phpWord, 'Word2007');
-
-        try {
-
-            $objWriter->save(storage_path('helloWorld.docx'));
-        } catch (Exception $e) {
-        }
-
-
-        return response()->download(storage_path('helloWorld.docx')); */
-        //$htmlTemplate = '<p style=" text-align: center;">asdasdasdasd</p><p>asd<strong>asd</strong></p><p>asdasd</p>';/* ' <p style="background-color:#FFFF00;color:#FF0000;">Some text</p>' */ 
-
-        //dd($request);
-
-        // $str = preg_replace('/div>/i', 'p>', $request->secret); //this line is not needed it's related to trix editor 
-        /* $redacted = str_replace('<br>','</p><p>',$str); */
-        // dd($request->title);
-        #endregion
+        // dd($request);
         $redacted = str_replace('<br data-cke-filler="true">', '<br data-cke-filler="true" />', $request->secret);
         // hsl to hex replace will replce until no hsl color
         $redacted  = preg_replace_callback('/hsl\((\d+),\s*(\d+%)\s*,\s*(\d+%)\)/', 'self::hslToHex', $redacted);
@@ -99,10 +88,11 @@ class MainController extends Controller
 
         $phpWord->save($file_path, 'Word2007');
 
-        $file = File::create([
+        $file = \App\Models\File::create([
             'title'=>$request->title,
             'desc'=>$request->desc,
             'filename' => $filename,
+            'params'=>$request->json_var_string,
             'user_id' => $user_id,
         ]);
         return redirect('/');

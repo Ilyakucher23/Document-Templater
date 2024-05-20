@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('title');
             $table->string('desc');
             $table->string('filename');
+            $table->string('params');
             $table->integer('user_id');
             $table->timestamps();
         });

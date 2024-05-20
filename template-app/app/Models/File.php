@@ -14,6 +14,7 @@ class File extends Model
         'title', 
         'desc',
         'filename',
+        'params',
         'user_id',
     ];
     public function user(): HasOne
