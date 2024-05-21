@@ -22,9 +22,6 @@
                     <div id="list" style="width: 130px; margin: 3px;">
                         <input type="text" id="list-input" class="form-control mb-3">
                         <button type="button" id="addItemButton" class="btn btn-primary">Add Item</button>
-                        <button type="button" id="getPositionButton" class="btn btn-primary mt-1">Check pos</button>
-                        <button type="button" id="test" onclick="collectData()"
-                            class="btn btn-primary mt-1">Collector</button>
                         <button type="submit" onclick="return prepareSubmit()" class="btn btn-primary mt-1">Save</button>
                     </div>
                 </div>
@@ -73,8 +70,6 @@
                     return [parent.getPath()[0], offset];
                 }
 
-                //haha web moment todo this is ugly :/
-                document.getElementById('getPositionButton').addEventListener('click', getCursorPosition);
 
                 function addItem() {
                     const model = editor.model;
@@ -147,6 +142,10 @@
                 console.error(error);
             });
 
+        function removeDuplicates(arr) {
+            return [...new Set(arr)];
+        }
+
         function prepareSubmit() {
             const content = editor.getData();
 
@@ -156,7 +155,7 @@
             // Find all matches
             const var_array = [...content.matchAll(regex)].map(match => match[1]);
 
-            document.getElementById("json_var_string").value = JSON.stringify(var_array);
+            document.getElementById("json_var_string").value = JSON.stringify(removeDuplicates(var_array));
             // alert(JSON.stringify(var_array));
             document.getElementById("secret").value = document.getElementById("editor").innerHTML;
             // alert(document.getElementById("secret").value);
