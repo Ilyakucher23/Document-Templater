@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\LocalizationController;
 
 //Template listing
 Route::get('/', [MainController::class, 'templates']);
@@ -33,3 +34,5 @@ Route::post('/logUser', [AuthController::class, 'logUser'])->name('logUser');
 
 
 Route::get('/test', [AuthController::class, 'createUserFolder'])->name('test');
+Route::get('/locale/{lang}', [LocalizationController::class, 'setLang']);
+

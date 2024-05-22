@@ -1,0 +1,25 @@
+<?php
+return [
+    'welcome' => 'Вітаємо ',
+    'home' => 'Головна сторінка',
+    'create_new_template_file' => 'Створити новий шаблон',
+    'login' => 'Вхід',
+    'sign_up' => 'Створити аккаунт',
+    'logout' => 'Вийти',
+    'create_acc' => 'Створити новий аккаунт',
+    'password' => 'Пароль',
+    'repeat_pas' => 'Повторити пароль',
+    'name' => 'Ім’я',
+    'email' => 'Електронна пошта',
+    'go_login' => 'Вже зареєстровані? Увійдіть в аккаунт',
+    'file_name' => 'Назва файлу',
+    'file_desc' => 'Опис файлу',
+    'go_editor' => 'Перейти до редактору',
+    'create_file' => 'Створити файл',
+    'add_item' => 'Додати змінну',
+    'save' => 'Створити файл',
+    'lang_selector' => '<img src="https://flagcdn.com/w20/ua.png"
+    srcset="https://flagcdn.com/w40/ua.png 2x" width="20" alt="Ukraine"> UA',
+    '<p>The initial editor data.</p>' => '<p>Початковий текст редактору.</p>',
+    'create' => 'Створити',
+];

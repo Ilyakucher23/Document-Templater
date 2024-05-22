@@ -20,6 +20,6 @@
         @endforeach
         
 
-        <button class="btn btn-primary w-100" type="submit">create</button>
+        <button class="btn btn-primary w-100" type="submit">@lang('public.create')</button>
     </form>
 @endsection

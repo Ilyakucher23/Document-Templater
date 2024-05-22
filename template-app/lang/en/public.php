@@ -1,0 +1,25 @@
+<?php
+return [
+    'welcome' => 'Welcome to our application!',
+    'home' => 'Home',
+    'create_new_template_file' => 'Create new template file',
+    'login' => 'Login',
+    'sign_up' => 'Sign up',
+    'logout' => 'logout',
+    'create_acc' => 'Create your Account',
+    'password' => 'Password',
+    'email' => 'Email',
+    'name' => 'Name',
+    'repeat_pas' => 'Repeat Password',
+    'go_login' => 'Already have an account? Login',
+    'file_name' => 'File name',
+    'file_desc' => 'File description',
+    'go_editor' => 'Go to editor',
+    'create_file' => 'Create file',
+    'add_item' => 'Add Item',
+    'save' => 'Save',
+    'lang_selector' => '<img src="https://flagcdn.com/w20/gb.png"
+    srcset="https://flagcdn.com/w40/gb.png 2x" width="20" alt="United Kingdom"> EN',
+    '<p>The initial editor data.</p>' => '<p>The initial editor data.</p>',
+    'create' => 'Create',
+];

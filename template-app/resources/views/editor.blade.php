@@ -17,12 +17,12 @@
                 <div class="document-editor__editable-container">
                     <div id="left" style=""></div>
                     <div name="content" id="editor" class="document-editor__editable">
-                        <p>The initial editor data.</p>
+                        @lang('public.<p>The initial editor data.</p>')
                     </div>
                     <div id="list" style="width: 130px; margin: 3px;">
                         <input type="text" id="list-input" class="form-control mb-3">
-                        <button type="button" id="addItemButton" class="btn btn-primary">Add Item</button>
-                        <button type="submit" onclick="return prepareSubmit()" class="btn btn-primary mt-1">Save</button>
+                        <button type="button" id="addItemButton" class="btn btn-primary">@lang('public.add_item')</button>
+                        <button type="submit" onclick="return prepareSubmit()" class="btn btn-primary mt-1">@lang('public.save')</button>
                     </div>
                 </div>
             </div>
