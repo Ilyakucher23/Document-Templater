@@ -9,7 +9,7 @@
 @endsection
 
 @section('content')
-    <div style="background-color: rgb(204,204,204);">
+    <div>
         <form action="/save" method="POST">
             @csrf
             <div class="document-editor">
@@ -19,10 +19,12 @@
                     <div name="content" id="editor" class="document-editor__editable">
                         @lang('public.<p>The initial editor data.</p>')
                     </div>
-                    <div id="list" style="width: 130px; margin: 3px;">
-                        <input type="text" id="list-input" class="form-control mb-3">
-                        <button type="button" id="addItemButton" class="btn btn-primary">@lang('public.add_item')</button>
-                        <button type="submit" onclick="return prepareSubmit()" class="btn btn-primary mt-1">@lang('public.save')</button>
+                    <div id="list" style="width: 150px; margin: 3px;">
+                        <input type="text" id="list-input" class="form-control mb-3" placeholder="@lang('public.variable_name')">
+                        <button type="button" id="addItemButton" style="width: 100%"
+                            class="btn btn-primary">@lang('public.add_item')</button>
+                        <button type="submit" onclick="return prepareSubmit()" style="width: 100%"
+                            class="btn btn-primary mt-1">@lang('public.save')</button>
                     </div>
                 </div>
             </div>
@@ -43,10 +45,21 @@
         DecoupledEditor
             .create(document.querySelector('#editor'), {
                 /* plugins: ['InlineWidgetPlugin'], */
+                fontSize: {
+                    options: [
+                        9,
+                        11,
+                        13,
+                        'default',
+                        17,
+                        19,
+                        21
+                    ]
+                },
                 // toolbar conf
                 toolbar: {
                     items: ['undo', 'redo',
-                        '|', 'fontfamily', 'fontsize', 'fontColor', 'fontBackgroundColor',
+                        '|', 'alignment', 'fontfamily', 'fontsize', 'fontColor', 'fontBackgroundColor',
                         '|', 'bold', 'italic', 'strikethrough', 'subscript', 'superscript', 'code',
                         '|', 'bulletedList', 'numberedList', 'todoList', 'outdent', 'indent'
                     ],

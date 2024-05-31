@@ -23,6 +23,7 @@
     {{-- <script src="https://cdn.ckeditor.com/ckeditor5/40.2.0/decoupled-document/ckeditor.js"></script> --}}
     <script src="{{ asset('assets/vendor/ckeditor5/build/ckeditor.js') }}"></script>
     <link href="{{ asset('css/styles.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     {{--  <script src="{{ asset('assets/vendor/ckeditor5/build/plugin.js') }}"></script> --}}
     <title>@yield('title')</title>
 </head>
@@ -65,7 +66,7 @@
                         <li class="nav-item"><span class="nav-link link-body-emphasis px-2">@lang('public.welcome')
                                 {{ auth()->user()->name }}</span></li>
                         <li class="nav-item"><button type="submit"
-                                class="nav-link link-body-emphasis px-2">@lang('public.logout')</button>
+                                class="nav-link link-body-emphasis px-2">@lang('public.logout') <i class="fa-solid fa-arrow-right-from-bracket"></i></button>
                         </li>
                     @else
                         <li class="nav-item"><a href="/login"

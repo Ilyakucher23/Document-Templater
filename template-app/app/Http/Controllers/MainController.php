@@ -69,13 +69,17 @@ class MainController extends Controller
 
     public function save(Request $request)
     {
+        // top 10 worst code ever written
         // dd($request);
         $redacted = str_replace('<br data-cke-filler="true">', '<br data-cke-filler="true" />', $request->secret);
         // hsl to hex replace will replce until no hsl color
         $redacted  = preg_replace_callback('/hsl\((\d+),\s*(\d+%)\s*,\s*(\d+%)\)/', 'self::hslToHex', $redacted);
         preg_match_all('/hsl\((\d+),/', $redacted, $matches, PREG_SET_ORDER);
 
+        //font family fix
+        $redacted = self::removeQuotesFromFontFamily($redacted);
         /*dd($request->secret); */
+        //dd($redacted);
         $phpWord = new PhpWord();
         $section = $phpWord->addSection();
         Html::addHtml($section, $redacted);
@@ -137,6 +141,16 @@ class MainController extends Controller
         $b = round(($b + $m) * 255);
 
         return sprintf("#%02X%02X%02X", $r, $g, $b);
+    }
+
+    static function removeQuotesFromFontFamily($html) {
+        // Regular expression to match font-family names wrapped in single quotes
+        $pattern = '/font-family:\'([^\']+)\',/';
+        // Replacement pattern to remove the single quotes
+        $replacement = 'font-family:$1,';
+        // Perform the replacement
+        $modifiedHtml = preg_replace($pattern, $replacement, $html);
+        return $modifiedHtml;
     }
 
     static function hslToHex($matches)
