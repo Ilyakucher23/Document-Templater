@@ -42,9 +42,18 @@
 
     <script>
         var var_array = [];
+
+        function DisallowNestingTables(editor) {
+            editor.model.schema.addChildCheck((context, childDefinition) => {
+                if (childDefinition.name == 'table' && Array.from(context.getNames()).includes('table')) {
+                    return false;
+                }
+            });
+        }
         DecoupledEditor
             .create(document.querySelector('#editor'), {
                 /* plugins: ['InlineWidgetPlugin'], */
+                extraPlugins: [ DisallowNestingTables ],
                 fontSize: {
                     options: [
                         9,
@@ -56,12 +65,15 @@
                         21
                     ]
                 },
+                table: {
+                    contentToolbar: ['tableColumn', 'tableRow']
+                },
                 // toolbar conf
                 toolbar: {
                     items: ['undo', 'redo',
-                        '|', 'alignment', 'fontfamily', 'fontsize', 'fontColor', 'fontBackgroundColor',
+                        '|', 'alignment', 'fontfamily', 'fontsize', '|', 'fontColor', 'fontBackgroundColor',
                         '|', 'bold', 'italic', 'strikethrough', 'subscript', 'superscript', 'code',
-                        '|', 'bulletedList', 'numberedList', 'todoList', 'outdent', 'indent'
+                        '|', 'bulletedList', 'numberedList', 'todoList', 'outdent', 'indent', 'insertTable'
                     ],
                     shouldNotGroupWhenFull: false
                 }
