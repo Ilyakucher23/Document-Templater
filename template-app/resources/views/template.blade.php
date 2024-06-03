@@ -25,6 +25,8 @@
     <link href="{{ asset('css/styles.css') }}" rel="stylesheet">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     {{--  <script src="{{ asset('assets/vendor/ckeditor5/build/plugin.js') }}"></script> --}}
+    <script src="//unpkg.com/alpinejs" defer></script>
+
     <title>@yield('title')</title>
 </head>
 
@@ -38,17 +40,19 @@
                     <li class="nav-item"><a href="/create" class="nav-link link-body-emphasis px-2">@lang('public.create_new_template_file')</a>
                     </li>
                 @endauth
+                <li class="nav-item"><a href="/default-templates" class="nav-link link-body-emphasis px-2 active"
+                        aria-current="page">@lang('public.static-templ')</a></li>
             </ul>
 
             <div class="dropdown">
-                <button style="min-width: 100px !important;" class="btn btn-light dropdown-toggle" id="dropdownMenuButton"  data-bs-toggle="dropdown" type="button" aria-expanded="false">
+                <button style="min-width: 100px !important;" class="btn btn-light dropdown-toggle"
+                    id="dropdownMenuButton" data-bs-toggle="dropdown" type="button" aria-expanded="false">
                     @lang('public.lang_selector')
                 </button>
                 <ul style="min-width: 100px !important;" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                     <li>
                         <a href="locale/en" class="dropdown-item"><img src="https://flagcdn.com/w20/gb.png"
-                                srcset="https://flagcdn.com/w40/gb.png 2x" 
-                                alt="United Kingdom"> EN </a>
+                                srcset="https://flagcdn.com/w40/gb.png 2x" alt="United Kingdom"> EN </a>
                     </li>
                     <li><a href="locale/ukr" class="dropdown-item"><img src="https://flagcdn.com/w20/ua.png"
                                 srcset="https://flagcdn.com/w40/ua.png 2x" alt="Ukraine"> UA </a>
@@ -66,7 +70,8 @@
                         <li class="nav-item"><span class="nav-link link-body-emphasis px-2">@lang('public.welcome')
                                 {{ auth()->user()->name }}</span></li>
                         <li class="nav-item"><button type="submit"
-                                class="nav-link link-body-emphasis px-2">@lang('public.logout') <i class="fa-solid fa-arrow-right-from-bracket"></i></button>
+                                class="nav-link link-body-emphasis px-2">@lang('public.logout') <i
+                                    class="fa-solid fa-arrow-right-from-bracket"></i></button>
                         </li>
                     @else
                         <li class="nav-item"><a href="/login"
@@ -82,8 +87,13 @@
 
     <main class="m-0 w-100">@yield('content')</main>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
-</script>
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
+    </script>
+    @if (session()->has('message'))
+        <div x-data="{show:true}" x-init="setTimeout(() => show = false,3000)" x-show="show" class="alert alert-primary position-absolute top-10 start-50 translate-middle text-white border-0">
+            {{ session('message') }}
+        </div>
+    @endif
 </body>
 
 </html>

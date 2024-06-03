@@ -24,6 +24,10 @@ Route::get('/editor', [MainController::class, 'editor']);
 
 Route::post('/save', [MainController::class, 'save']);
 
+//DEFAULT TEMPLATES TODO
+Route::get('/default-templates', [MainController::class, 'def_templates_show']);
+Route::get('/generate_def_doc/{id}', [MainController::class, 'download_def_doc'])->where('id', '[0-9]+');
+
 //Authentiation/registration
 Route::get('/login', [AuthController::class, 'login']);
 Route::get('/registration', [AuthController::class, 'registration']);

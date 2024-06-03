@@ -56,6 +56,13 @@ class MainController extends Controller
         // return redirect('/');
     }
 
+    public function download_def_doc($file_id)
+    {
+        //code here
+        return view('create_def_template');
+        //return  redirect('/generate_def_doc')->with('message','Document created');   
+    }
+
     public function editor(Request $request)
     {
         //dd($request);
@@ -114,6 +121,17 @@ class MainController extends Controller
         return view('index', ['templates' => []]);
     }
 
+
+    public function def_templates_show()
+    {
+        return view('def_template_show');
+    }
+
+    public function def_templates_create()
+    {
+        return view('def_template_create');
+    }
+    //haha top 10 worst decisions
     static function ColorHSLToRGB($hue, $saturation, $luminosity)
     {
         $hue = $hue / 360; // Normalize hue to [0, 1]

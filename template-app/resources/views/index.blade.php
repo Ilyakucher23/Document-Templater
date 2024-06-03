@@ -18,12 +18,11 @@
 
                             </div>
                             <div class="col-auto">
-                                <button class="btn btn-primary">Удалить</button>
-                                <button class="btn btn-primary">Редактировать</button>
+                                <button class="btn btn-primary">@lang('public.delete')</button>
+                                {{-- <button class="btn btn-primary">Редактировать</button> --}}
                             </div>
                         </div>
                     </div>
-
                 </div>
             @endforeach
         @else
@@ -34,7 +33,7 @@
                 </div> --}}
 
                 <h1 class="display-5 fw-bold lh-1 mb-3">@lang('public.app_name')</h1>
-                <p class="lead">
+                <p class="lead" style="padding-right: 240px; padding-left: 240px;">
                     @lang('public.instruction')
                 </p>
                 <div class="text-center">
@@ -42,23 +41,30 @@
                 </div>
 
             </div>
-            <div class="pt-5 mx-5 text-center border shadow-lg bg-light">
+            <div class="pt-5 mx-5 text-center border shadow-lg bg-light fs-4 lh-1"
+                style="font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif">
                 <p>
+                <div class="py-3">
                     @lang('public.guide_1')
-                    <img class="d-block mx-lg-auto img-fluid" src="{{ asset('screenshot/screen_reg.png') }}" alt=""
-                        width="300">
+                </div>
+                <img class="d-block mx-lg-auto img-fluid" src="{{ asset('screenshot/screen_reg.png') }}" alt=""
+                    width="300">
                 </p>
                 <p>
+                <div class="py-3">
                     @lang('public.guide_2')
-                    <img class="d-block mx-lg-auto img-fluid" src="{{ asset('screenshot/screen_create_template.png') }}" alt=""
-                        width="720">
-                    <img class="d-block mx-lg-auto img-fluid" src="{{ asset('screenshot/screen_doc.png') }}" alt=""
-                        width="720">
+                </div>
+                <img class="d-block mx-lg-auto img-fluid" src="{{ asset('screenshot/screen_create_template.png') }}"
+                    alt="" width="720">
+                <img class="d-block mx-lg-auto img-fluid" src="{{ asset('screenshot/screen_doc.png') }}" alt=""
+                    width="720">
                 </p>
                 <p>
+                <div class="py-3">
                     @lang('public.guide_3')
-                    <img class="d-block mx-lg-auto img-fluid" src="{{ asset('screenshot/screen_create_docx.png') }}" alt=""
-                        width="720">
+                </div>
+                <img class="d-block mx-lg-auto img-fluid" src="{{ asset('screenshot/screen_create_docx.png') }}" alt=""
+                    width="720">
                 </p>
             </div>
         @endauth

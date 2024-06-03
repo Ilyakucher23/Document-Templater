@@ -14,7 +14,7 @@
                     @csrf
                     <div class="mb-3 input-group">
                         <span class="input-group-text"><i class="fas fa-at"></i></span>
-                        <input name="email" type="email" class="form-control" id="inputEmail" placeholder="@lang('public.email')">
+                        <input name="email" type="email" class="form-control" id="inputEmail" placeholder="@lang('public.email')" value="{{old('email')}}">
                     </div>
                     @error('email')
                         <p class="text-danger">

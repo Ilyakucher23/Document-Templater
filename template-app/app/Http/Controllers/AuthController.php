@@ -30,7 +30,7 @@ class AuthController extends Controller
         $user = User::create($fields);
         auth()->login($user);
         Storage::makeDirectory("userfiles/{$user->id}");
-        return redirect('/');
+        return redirect('/')->with('message','auth.acc_create_suc');
         // return redirect('/')->with('message','You are logged in!');
     }
     public function logout(Request $request)
@@ -50,9 +50,9 @@ class AuthController extends Controller
 
         if (auth()->attempt($fields)) {
             $request->session()->regenerate();
-            return redirect('/');
+            return redirect('/')->with('message',trans('auth.acc_create'));
         }
-        return back()->withErrors(['email' => 'Invalid User']);
+        return back()->withErrors(['email' => trans('auth.acc_invalid_user')]);
     }
     public function createUserFolder()
     {
