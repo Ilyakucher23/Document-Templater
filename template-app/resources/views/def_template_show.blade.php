@@ -16,9 +16,6 @@
                     <p class="card-text col">{{ $template->desc }}</p>
 
                 </div>
-                <div class="col-auto">
-                    <button class="btn btn-primary">@lang('public.delete')</button>
-                </div>
             </div>
         </div>
         @endforeach
