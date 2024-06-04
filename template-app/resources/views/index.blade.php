@@ -18,7 +18,9 @@
 
                             </div>
                             <div class="col-auto">
-                                <button class="btn btn-primary">@lang('public.delete')</button>
+                                <a href="/delete/{{ $template->id }}"
+                                    class="btn btn-primary">@lang('public.delete')</a>
+                                {{-- <button class="btn btn-primary">@lang('public.delete')</button> --}}
                                 {{-- <button class="btn btn-primary">Редактировать</button> --}}
                             </div>
                         </div>

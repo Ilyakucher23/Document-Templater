@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Exception;
 use App\Models\File;
+use App\Models\StaticFiles;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use PhpOffice\PhpWord\PhpWord;
@@ -19,7 +20,7 @@ class MainController extends Controller
     public function make_doc($file_id)
     {
         //calc
-        return view('document_show', ['template' => \App\Models\File::find($file_id)]);
+        return view('document_show', ['template' => File::find($file_id)]);
     }
     public function download_doc($file_id)
     {
@@ -55,14 +56,47 @@ class MainController extends Controller
         return response()->download(($new_path))->deleteFileAfterSend(true);;
         // return redirect('/');
     }
-
+    
+    public function make_def_doc($file_id){
+        return view('create_def_template', ['template' => StaticFiles::find($file_id)]);
+    }
+    
     public function download_def_doc($file_id)
     {
+
+        $file = StaticFiles::find($file_id);
+        $doc_dict = array_combine(request()->doc_vars_names, request()->doc_vars);
+        // $user_id = auth()->user()->id;
+        $user_folder = storage_path("app\\public\\");
+        $filename = $file->filename;
+
+        $old_path = $user_folder . $filename;
+        $new_path = $user_folder . "new_" . $filename;
+
+        
+        \Illuminate\Support\Facades\File::copy($old_path, $new_path);
+
+        $templateProcessor = new TemplateProcessor($new_path);        
+        foreach ($doc_dict as $key => $value) {
+            $templateProcessor->setValue($key, $value);
+        }
+        $templateProcessor->saveAs($new_path);
+
+        return response()->download(($new_path))->deleteFileAfterSend(true);;
+        // return redirect('/');
+
+
         //code here
-        return view('create_def_template');
+        // return view('create_def_template');
         //return  redirect('/generate_def_doc')->with('message','Document created');   
     }
-
+    public function delete_template($file_id){
+        
+        $file = File::find($file_id);
+        $title=$file->title;
+        $file->delete();
+        return redirect('/')->with('message',"Template '{$title}' deleted!");
+    }
     public function editor(Request $request)
     {
         //dd($request);
@@ -124,13 +158,13 @@ class MainController extends Controller
 
     public function def_templates_show()
     {
-        return view('def_template_show');
+        return view('def_template_show', ['templates' => StaticFiles::all()]);
     }
 
-    public function def_templates_create()
-    {
-        return view('def_template_create');
-    }
+    // public function def_templates_create()
+    // {
+    //     return view('def_template_create');
+    // }
     //haha top 10 worst decisions
     static function ColorHSLToRGB($hue, $saturation, $luminosity)
     {

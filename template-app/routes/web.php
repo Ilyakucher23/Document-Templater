@@ -18,6 +18,9 @@ Route::get('/generate/{id}', [MainController::class, 'make_doc'])->where('id', '
 
 Route::post('/generate/{id}/download', [MainController::class, 'download_doc'])->where('id', '[0-9]+');
 
+
+Route::get('/delete/{id}', [MainController::class, 'delete_template'])->where('id', '[0-9]+');
+
 Route::get('/create', [MainController::class, 'create']);
 
 Route::get('/editor', [MainController::class, 'editor']);
@@ -26,7 +29,8 @@ Route::post('/save', [MainController::class, 'save']);
 
 //DEFAULT TEMPLATES TODO
 Route::get('/default-templates', [MainController::class, 'def_templates_show']);
-Route::get('/generate_def_doc/{id}', [MainController::class, 'download_def_doc'])->where('id', '[0-9]+');
+Route::get('/generate_def_doc/{id}', [MainController::class, 'make_def_doc'])->where('id', '[0-9]+');
+Route::post('/generate_def_doc/{id}/download', [MainController::class, 'download_def_doc'])->where('id', '[0-9]+');
 
 //Authentiation/registration
 Route::get('/login', [AuthController::class, 'login']);
