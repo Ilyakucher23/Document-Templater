@@ -28,14 +28,10 @@
                 </div>
             @endforeach
         @else
-            <div class="p-5 my-5 text-center border bg-light">
-                {{-- <div class="col-10 col-sm-8 col-lg-6">
-                    <img class="d-block mx-lg-auto img-fluid" src="{{ asset('screenshot/screen_1.png') }}" alt=""
-                        width="720">
-                </div> --}}
+            <div class="hero p-5 my-5 text-center border bg-light" id="hero">
 
                 <h1 class="display-5 fw-bold lh-1 mb-3">@lang('public.app_name')</h1>
-                <p class="lead" style="padding-right: 240px; padding-left: 240px;">
+                <p class="lead p-3 mx-auto" style="max-width: 600pt;">
                     @lang('public.instruction')
                 </p>
                 <div class="text-center">
@@ -43,29 +39,29 @@
                 </div>
 
             </div>
-            <div class="pt-5 mx-5 text-center border shadow-lg bg-light fs-4 lh-1"
+            <div class="pt-5 text-center border shadow-lg bg-light fs-4 lh-1" id="guide"
                 style="font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif">
                 <p>
                 <div class="py-3">
                     @lang('public.guide_1')
                 </div>
-                <img class="d-block mx-lg-auto img-fluid" src="{{ asset('screenshot/screen_reg.png') }}" alt=""
+                <img class="d-block mx-auto img-fluid" src="{{ asset('screenshot/screen_reg.png') }}" alt=""
                     width="300">
                 </p>
                 <p>
                 <div class="py-3">
                     @lang('public.guide_2')
                 </div>
-                <img class="d-block mx-lg-auto img-fluid" src="{{ asset('screenshot/screen_create_template.png') }}"
-                    alt="" width="720">
-                <img class="d-block mx-lg-auto img-fluid" src="{{ asset('screenshot/screen_doc.png') }}" alt=""
+                <img class="d-block mx-auto img-fluid" src="{{ asset('screenshot/screen_create_template.png') }}" alt=""
+                    width="720">
+                <img class="d-block mx-auto img-fluid" src="{{ asset('screenshot/screen_doc.png') }}" alt=""
                     width="720">
                 </p>
                 <p>
                 <div class="py-3">
                     @lang('public.guide_3')
                 </div>
-                <img class="d-block mx-lg-auto img-fluid" src="{{ asset('screenshot/screen_create_docx.png') }}" alt=""
+                <img class="d-block mx-auto img-fluid" src="{{ asset('screenshot/screen_create_docx.png') }}" alt=""
                     width="720">
                 </p>
             </div>
