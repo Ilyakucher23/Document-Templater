@@ -38,7 +38,7 @@ class AuthController extends Controller
         auth()->logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-        return redirect('/');
+        return redirect('/')->with('message',trans('auth.acc_logout'));
     }
     public function logUser(Request $request)
     {
@@ -50,7 +50,7 @@ class AuthController extends Controller
 
         if (auth()->attempt($fields)) {
             $request->session()->regenerate();
-            return redirect('/')->with('message',trans('auth.acc_create'));
+            return redirect('/')->with('message',trans('auth.acc_login'));
         }
         return back()->withErrors(['email' => trans('auth.acc_invalid_user')]);
     }

@@ -12,19 +12,25 @@ return [
     'name' => 'Ім’я',
     'email' => 'Електронна пошта',
     'go_login' => 'Вже зареєстровані? Увійдіть в аккаунт',
+
     'file_name' => 'Назва файлу',
     'file_desc' => 'Опис файлу',
+
     'go_editor' => 'Перейти до редактору',
     'create_file' => 'Створити файл',
     'delete' => 'Видалити',
     'add_item' => 'Додати змінну',
     'save' => 'Створити файл',
+    'template_create' => 'Шаблон :title створено успішно',
+    'template_del' => "Шаблон :title видалено!",
+
     'lang_selector' => '<img src="https://flagcdn.com/w20/ua.png"
     srcset="https://flagcdn.com/w40/ua.png 2x" width="20" alt="Ukraine"> UA',
     '<p>The initial editor data.</p>' => '<p>Початковий текст редактору.</p>',
     'create' => 'Створити',
     'variable_name' => 'Назва змінної',
-    'app_name' => 'шаблонізатор документів',
+
+    'app_name' => 'Шаблонізатор документів',
     'guide_1' => '1. Створити акаунт',
     'guide_2' =>  '2. Створити шаблон',
     'guide_3' => '3. Завантажити файл',

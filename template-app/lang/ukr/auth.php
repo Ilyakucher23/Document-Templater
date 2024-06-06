@@ -16,8 +16,10 @@ return [
     /* 'failed' => 'These credentials do not match our records.',
     'password' => 'The provided password is incorrect.',
     'throttle' => 'Too many login attempts. Please try again in :seconds seconds.', */
+    'acc_login' => 'Авторизація успішна!',
     'acc_create' => 'Аккаунт створено!',
-    'acc_invalid_user' => 'Неправильні дані',
+    'acc_invalid_user' => 'Неправильні облікові дані.',
     'acc_create_suc'=>'Аккаунт створено!',
+    'acc_logout' => 'Ви вийшли з системи',
 
 ];

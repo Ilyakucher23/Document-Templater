@@ -5,7 +5,9 @@ body {
     background-color: #f0f4ff;
 }
 
-
+.alert {
+    transition: opacity 0.5s ease-in-out;
+}
 
 .alert-primary {
     color: #4747ff;
@@ -47,13 +49,13 @@ button.bg-primary:focus {
     border-color: #c2c2ff !important;
 }
 
-.btn-primary {
+.btn-primary:hover {
     color: #212529;
     background-color: #c2c2ff;
     border-color: #c2c2ff;
 }
 
-.btn-primary:hover {
+.btn-primary {
     color: #212529;
     background-color: #9e9eff;
     border-color: #8f8fff;

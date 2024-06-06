@@ -16,7 +16,9 @@ return [
     /* 'failed' => 'These credentials do not match our records.',
     'password' => 'The provided password is incorrect.',
     'throttle' => 'Too many login attempts. Please try again in :seconds seconds.', */
+    'acc_login' => 'Authoriztion succesful!',
     'acc_create' => 'Account created successfully!',
-    'acc_invalid_user'=> 'Invalid user',
-    'acc_create_suc'=>'You are logged in!',
+    'acc_invalid_user'=> 'These credentials do not match our records.',
+    'acc_create_suc'=>'Account creation succesful!',
+    'acc_logout' => 'You have successfully logged out',
 ];

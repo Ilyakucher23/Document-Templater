@@ -41,6 +41,8 @@
                 margin-left: 0px !important;
                 margin-right: 0px !important;
             }
+
+
         }
 
         /* @media (min-width: 991.98px) {
@@ -118,17 +120,20 @@
             </div>
         </div>
     </nav>
-
+    @if (session()->has('message'))
+        <div x-data="{ show: true }" x-init="setTimeout(() => show = false, 3000)" x-show="show"
+            x-transition:leave="transition ease-in duration-500" x-transition:leave-start="opacity-100"
+            x-transition:leave-end="opacity-0"
+            class="alert alert-primary position-fixed top-10 start-50 translate-middle text-white border-0"
+            style="z-index: 999;">
+            {{ session('message') }}
+        </div>
+    @endif
     <main class="m-0 w-100">@yield('content')</main>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
     </script>
-    @if (session()->has('message'))
-        <div x-data="{ show: true }" x-init="setTimeout(() => show = false, 3000)" x-show="show"
-            class="alert alert-primary position-absolute top-10 start-50 translate-middle text-white border-0">
-            {{ session('message') }}
-        </div>
-    @endif
+
 </body>
 
 </html>

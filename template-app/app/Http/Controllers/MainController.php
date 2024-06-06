@@ -56,11 +56,12 @@ class MainController extends Controller
         return response()->download(($new_path))->deleteFileAfterSend(true);;
         // return redirect('/');
     }
-    
-    public function make_def_doc($file_id){
+
+    public function make_def_doc($file_id)
+    {
         return view('create_def_template', ['template' => StaticFiles::find($file_id)]);
     }
-    
+
     public function download_def_doc($file_id)
     {
 
@@ -73,10 +74,10 @@ class MainController extends Controller
         $old_path = $user_folder . $filename;
         $new_path = $user_folder . "new_" . $filename;
 
-        
+
         \Illuminate\Support\Facades\File::copy($old_path, $new_path);
 
-        $templateProcessor = new TemplateProcessor($new_path);        
+        $templateProcessor = new TemplateProcessor($new_path);
         foreach ($doc_dict as $key => $value) {
             $templateProcessor->setValue($key, $value);
         }
@@ -90,12 +91,13 @@ class MainController extends Controller
         // return view('create_def_template');
         //return  redirect('/generate_def_doc')->with('message','Document created');   
     }
-    public function delete_template($file_id){
-        
+    public function delete_template($file_id)
+    {
+
         $file = File::find($file_id);
-        $title=$file->title;
+        $title = $file->title;
         $file->delete();
-        return redirect('/')->with('message',"Template '{$title}' deleted!");
+        return redirect('/')->with('message','asssasdasdads' /* trans('public.template_del', ['title' => $title]) */);
     }
     public function editor(Request $request)
     {
@@ -144,7 +146,7 @@ class MainController extends Controller
             'params' => $request->json_var_string,
             'user_id' => $user_id,
         ]);
-        return redirect('/');
+        return redirect('/')->with('message', trans('public.template_create', ['title' => $request->title]));
     }
     public function templates()
     {
