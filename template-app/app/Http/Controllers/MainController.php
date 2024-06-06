@@ -97,7 +97,7 @@ class MainController extends Controller
         $file = File::find($file_id);
         $title = $file->title;
         $file->delete();
-        return redirect('/')->with('message','asssasdasdads' /* trans('public.template_del', ['title' => $title]) */);
+        return redirect('/')->with('message', trans('public.template_del', ['title' => $title]));
     }
     public function editor(Request $request)
     {
